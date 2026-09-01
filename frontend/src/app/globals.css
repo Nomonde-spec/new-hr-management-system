@@ -1,0 +1,181 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  :root {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 250 84% 67%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
+
+    --radius: 0.75rem;
+  }
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.light body { background-color: #f4f7fb; color: #172033; }
+.light .glass-panel { background: rgba(255, 255, 255, .86); border-color: #d9e1ec; box-shadow: 0 12px 30px -18px rgba(30, 45, 70, .35); }
+.light .glass-card { background: rgba(255, 255, 255, .92); border-color: #d9e1ec; }
+.light .bg-slate-950, .light .bg-slate-950\/50, .light .bg-slate-900\/80, .light .bg-slate-900\/60 { background-color: #fff; }
+.light .text-white, .light .text-slate-100, .light .text-slate-200, .light .text-slate-300 { color: #172033; }
+.light .text-slate-400, .light .text-slate-500 { color: #5f6d80; }
+.light .border-slate-800, .light .border-slate-800\/60, .light .border-slate-800\/80, .light .border-slate-700\/60 { border-color: #d9e1ec; }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(71, 85, 105, 0.5);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.7);
+}
+
+/* Glassmorphism components */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -10px rgba(99, 102, 241, 0.2);
+}
+
+/* Gradient accents */
+.gradient-text {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+}
+
+.badge-present {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-late {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-absent {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.badge-pending {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(420px, 1.1fr);
+  background: #f4f1eb;
+  color: #17211c;
+}
+
+.auth-brand-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(2rem, 7vw, 7rem);
+  min-height: 100vh;
+  color: #f4f1eb;
+  background: radial-gradient(circle at 20% 20%, rgba(245, 158, 11, 0.3), transparent 32%), linear-gradient(145deg, #183d35, #102b2a 65%, #17211c);
+}
+
+.register-brand { background: radial-gradient(circle at 75% 18%, rgba(56, 189, 248, 0.25), transparent 30%), linear-gradient(145deg, #173b4a, #102c36 65%, #17211c); }
+.brand-mark { width: 3.25rem; height: 3.25rem; display: grid; place-items: center; border-radius: 1rem; color: #102c2a; background: #e5b86b; box-shadow: 0 12px 30px rgba(0, 0, 0, .2); }
+.brand-mark svg { width: 1.65rem; height: 1.65rem; }
+.auth-brand-panel .brand-mark { margin-bottom: auto; }
+.auth-kicker { margin: 0 0 .7rem; color: #c8954d; font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.auth-brand-panel h1 { max-width: 32rem; margin: 0; font-family: Georgia, serif; font-size: clamp(2.6rem, 4.5vw, 5.2rem); font-weight: 400; line-height: .98; letter-spacing: 0; }
+.auth-brand-panel > p:last-child { max-width: 27rem; margin: 1.5rem 0 0; color: #b9cbc0; line-height: 1.7; }
+.auth-form-panel { display: grid; place-items: center; padding: 2rem; }
+.auth-form-wrap { width: min(100%, 29rem); }
+.auth-form-wrap h2 { margin: 0; font-family: Georgia, serif; font-size: 2.5rem; font-weight: 400; line-height: 1.05; letter-spacing: 0; }
+.auth-muted { margin: .8rem 0 2rem; color: #6b756e; font-size: .92rem; }
+.auth-form { display: grid; gap: 1.1rem; }
+.auth-form label { display: grid; gap: .45rem; color: #425048; font-size: .78rem; font-weight: 800; letter-spacing: .04em; }
+.auth-form input, .auth-form select { width: 100%; border: 1px solid #ccd4ce; border-radius: .65rem; padding: .85rem .95rem; background: rgba(255, 255, 255, .75); color: #17211c; font: inherit; font-size: .92rem; outline: none; }
+.auth-form input:focus, .auth-form select:focus { border-color: #347c6c; box-shadow: 0 0 0 3px rgba(52, 124, 108, .14); }
+.password-field { position: relative; }
+.password-field input { padding-right: 3rem; }
+.password-field button { position: absolute; top: 50%; right: .7rem; display: grid; place-items: center; padding: .25rem; border: 0; background: transparent; color: #6b756e; transform: translateY(-50%); cursor: pointer; }
+.password-field button svg { width: 1.1rem; height: 1.1rem; }
+.auth-submit { display: flex; align-items: center; justify-content: center; gap: .65rem; margin-top: .4rem; border: 0; border-radius: .65rem; padding: .9rem 1rem; background: #225f54; color: white; font: inherit; font-size: .88rem; font-weight: 800; cursor: pointer; }
+.auth-submit:hover { background: #17493f; }
+.auth-submit:disabled { opacity: .6; cursor: wait; }
+.auth-submit svg { width: 1rem; height: 1rem; }
+.auth-error { margin: 0; color: #b3473f; font-size: .8rem; }
+.auth-switch { margin-top: 1.5rem; color: #6b756e; font-size: .84rem; text-align: center; }
+.auth-switch a { color: #225f54; font-weight: 800; text-decoration: none; }
+.mobile-brand { display: none; align-items: center; gap: .7rem; margin-bottom: 3rem; color: #225f54; font-weight: 800; }
+.mobile-brand .brand-mark { width: 2.5rem; height: 2.5rem; border-radius: .75rem; }
+
+@media (max-width: 800px) {
+  .auth-page { display: block; }
+  .auth-brand-panel { display: none; }
+  .auth-form-panel { min-height: 100vh; padding: 2rem 1.25rem; }
+  .mobile-brand { display: flex; }
+}
