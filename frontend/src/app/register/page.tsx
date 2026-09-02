@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, UserPlus, ShieldCheck } from 'lucide-react';
-import { authApi, departmentApi } from '@/lib/api';
+import { authApi } from '@/lib/api';
 
 const roles = [
   { value: 'SUPER_ADMIN', label: 'Admin' },
@@ -14,29 +14,10 @@ const roles = [
 
 export default function RegisterPage() {
   const router = useRouter();
-  const [departments, setDepartments] = useState<any[]>([]);
   const [form, setForm] = useState({ name: '', email: '', password: '', role: 'EMPLOYEE', departmentId: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
-
-  useEffect(() => {
-    const loadDepartments = async () => {
-      try {
-        const res = await departmentApi.getDepartments();
-        if (res?.data?.success && Array.isArray(res.data.departments)) {
-          setDepartments(res.data.departments);
-          if (res.data.departments.length > 0) {
-            setForm((prev) => ({ ...prev, departmentId: prev.departmentId || res.data.departments[0].id }));
-          }
-        }
-      } catch (err) {
-        console.error('Failed to load departments:', err);
-      }
-    };
-
-    loadDepartments();
-  }, []);
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
@@ -71,10 +52,6 @@ export default function RegisterPage() {
             <label>Full name<input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your full name" required /></label>
             <label>Work email<input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="you@company.com" required /></label>
             <label>Role<select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })}>{roles.map((role) => <option key={role.value} value={role.value}>{role.label}</option>)}</select></label>
-            <label>Department<select value={form.departmentId} onChange={(e) => setForm({ ...form, departmentId: e.target.value })} required>
-              <option value="">Select department</option>
-              {departments.map((dept) => <option key={dept.id} value={dept.id}>{dept.name}</option>)}
-            </select></label>
             <label>Password<div className="password-field"><input type={showPassword ? 'text' : 'password'} value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="At least 8 characters" minLength={8} required /><button type="button" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? 'Hide password' : 'Show password'}>{showPassword ? <EyeOff /> : <Eye />}</button></div></label>
             {error && <p className="auth-error">{error}</p>}
             <button className="auth-submit" disabled={submitting}>{submitting ? 'Creating account...' : 'Create account'}<UserPlus /></button>
